@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kosmos.Extract.Tripadvisor"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kosmos.Extract.Tripadvisor.Tests", "Kosmos.Extract.Tripadvisor.Tests\Kosmos.Extract.Tripadvisor.Tests.csproj", "{8DDE649A-C8CC-4B3F-AD79-BFA65DF3FC01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kosmos.Extract.tripadvisor.Model", "Kosmos.Extract.tripadvisor.Model\Kosmos.Extract.tripadvisor.Model.csproj", "{04C7F548-0871-4025-B0F7-00DE7B555FA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kosmos.Extract.Tripadvisor.ModelDbMapping", "Kosmos.Extract.Tripadvisor.ModelDbMapping\Kosmos.Extract.Tripadvisor.ModelDbMapping.csproj", "{E9101924-3614-4F1C-A8D2-16B0DBF41931}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kosmos.Extract.Tripadvisor.DbContext", "Kosmos.Extract.Tripadvisor.DbContext\Kosmos.Extract.Tripadvisor.DbContext.csproj", "{D20CB833-B847-4500-9E03-B04A4C96EBD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{8DDE649A-C8CC-4B3F-AD79-BFA65DF3FC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DDE649A-C8CC-4B3F-AD79-BFA65DF3FC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DDE649A-C8CC-4B3F-AD79-BFA65DF3FC01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C7F548-0871-4025-B0F7-00DE7B555FA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C7F548-0871-4025-B0F7-00DE7B555FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C7F548-0871-4025-B0F7-00DE7B555FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C7F548-0871-4025-B0F7-00DE7B555FA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9101924-3614-4F1C-A8D2-16B0DBF41931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9101924-3614-4F1C-A8D2-16B0DBF41931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9101924-3614-4F1C-A8D2-16B0DBF41931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9101924-3614-4F1C-A8D2-16B0DBF41931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20CB833-B847-4500-9E03-B04A4C96EBD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20CB833-B847-4500-9E03-B04A4C96EBD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20CB833-B847-4500-9E03-B04A4C96EBD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20CB833-B847-4500-9E03-B04A4C96EBD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

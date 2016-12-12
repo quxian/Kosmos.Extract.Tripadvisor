@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kosmos.Extract.Tripadvisor.DbContext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,20 @@ namespace Kosmos.Extract.Tripadvisor
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+            using (var dbContext = new AppDbContext())
+            {
+                ExtractResultCache.CacheToDb(dbContext);
+            }
+        }
+
+        void Application_End(object sender, EventArgs e)
+        {
+            using (var dbContext = new AppDbContext())
+            {
+                ExtractResultCache.CacheToDb(dbContext);
+            }
         }
     }
 }
