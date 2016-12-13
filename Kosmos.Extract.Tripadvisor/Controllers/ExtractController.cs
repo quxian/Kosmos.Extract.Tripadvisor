@@ -2,6 +2,7 @@
 using Kosmos.Extract.Tripadvisor.DbContext;
 using Kosmos.Singleton;
 using Newtonsoft.Json;
+using StringExtensionForYongsheng;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,8 +57,16 @@ namespace Kosmos.Extract.Tripadvisor.Controllers
                     //所有评论
                     comments = ExtractComment(doc, images),
                 };
-
-                ExtractResultCache.Result.Add(JsonConvert.SerializeObject(model));
+                var result = JsonConvert.SerializeObject(model);
+                ExtractResultCache.Result.Add(new tripadvisor.Model.ExtractResult
+                {
+                    Depth = downloadResult.Depth,
+                    Domain = downloadResult.Domain,
+                    ExtractData = DateTime.Now,
+                    HashCode = result.GetMD5HashCode(),
+                    Result = result,
+                    Url = downloadResult.Url
+                });
             }
             catch (Exception e)
             {
@@ -113,28 +122,28 @@ namespace Kosmos.Extract.Tripadvisor.Controllers
                         }
                         return new
                         {
-                        //头像
-                        avatar = image?.data,
-                        //用户名
-                        username = nodes?.SelectNodes("//*[contains(@class,'username')]")?.FindFirst("span")?.InnerText?.Replace("\n", ""),
-                        //用户国籍
-                        location = nodes?.SelectNodes("//*[contains(@class,'location')]")?.First()?.InnerText?.Replace("\n", ""),
-                        //用户等级
-                        level = nodes?.SelectNodes("//*[contains(@class,'levelBadge')]")?.First()?.Attributes["class"].Value?.Replace("levelBadge", "")?.Replace("badge", "")?.Replace("lvl_", ""),
-                        //用户总共评价次数
-                        commentCount = nodes?.SelectNodes("//*[contains(@class,'badgeText')]")?.First()?.InnerText?.Replace("条点评", "")?.Replace("\n", ""),
-                        //用户总共贫家餐厅次数
-                        commentRestaurantCount = nodes?.SelectNodes("//*[contains(@class,'contributionReviewBadge')]")?.First()?.InnerText.Replace("条餐厅点评", "").Replace("\n", ""),
-                        //被其他用户点赞次数
-                        helpfulVotes = nodes?.SelectNodes("//*[contains(@class,'helpfulVotesBadge')]")?.First()?.InnerText?.Replace("人推荐", "").Replace("\n", ""),
-                        //评论标题
-                        title = nodes?.SelectNodes("//*[contains(@class,'noQuotes')]")?.First()?.InnerText?.Replace("\n", ""),
-                        //评分
-                        rate = nodes?.SelectNodes("//*[contains(@class,'sprite-rating_s_fill')]")?.First()?.Attributes["alt"]?.Value,
-                        //评论时间
-                        ratingDate = nodes?.SelectNodes("//*[contains(@class,'ratingDate')]")?.First()?.InnerText,
-                        //评论内容
-                        comment = nodes?.SelectNodes("//*[contains(@class,'partial_entry')]")?.First()?.InnerText
+                            //头像
+                            avatar = image?.data,
+                            //用户名
+                            username = nodes?.SelectNodes("//*[contains(@class,'username')]")?.FindFirst("span")?.InnerText?.Replace("\n", ""),
+                            //用户国籍
+                            location = nodes?.SelectNodes("//*[contains(@class,'location')]")?.First()?.InnerText?.Replace("\n", ""),
+                            //用户等级
+                            level = nodes?.SelectNodes("//*[contains(@class,'levelBadge')]")?.First()?.Attributes["class"].Value?.Replace("levelBadge", "")?.Replace("badge", "")?.Replace("lvl_", ""),
+                            //用户总共评价次数
+                            commentCount = nodes?.SelectNodes("//*[contains(@class,'badgeText')]")?.First()?.InnerText?.Replace("条点评", "")?.Replace("\n", ""),
+                            //用户总共贫家餐厅次数
+                            commentRestaurantCount = nodes?.SelectNodes("//*[contains(@class,'contributionReviewBadge')]")?.First()?.InnerText.Replace("条餐厅点评", "").Replace("\n", ""),
+                            //被其他用户点赞次数
+                            helpfulVotes = nodes?.SelectNodes("//*[contains(@class,'helpfulVotesBadge')]")?.First()?.InnerText?.Replace("人推荐", "").Replace("\n", ""),
+                            //评论标题
+                            title = nodes?.SelectNodes("//*[contains(@class,'noQuotes')]")?.First()?.InnerText?.Replace("\n", ""),
+                            //评分
+                            rate = nodes?.SelectNodes("//*[contains(@class,'sprite-rating_s_fill')]")?.First()?.Attributes["alt"]?.Value,
+                            //评论时间
+                            ratingDate = nodes?.SelectNodes("//*[contains(@class,'ratingDate')]")?.First()?.InnerText,
+                            //评论内容
+                            comment = nodes?.SelectNodes("//*[contains(@class,'partial_entry')]")?.First()?.InnerText
                         };
                     })
                     .Where(x => null != x)

@@ -18,10 +18,10 @@ namespace Kosmos.Extract.Tripadvisor
         private static object _lock = new object();
         private static Task _task;
 
-        public static ConcurrentBag<string> Result { get; set; }
+        public static ConcurrentBag<ExtractResult> Result { get; set; }
         static ExtractResultCache()
         {
-            Result = new ConcurrentBag<string>();
+            Result = new ConcurrentBag<ExtractResult>();
 
             _task = Task.Run(async () =>
             {
@@ -48,15 +48,10 @@ namespace Kosmos.Extract.Tripadvisor
         {
             lock (_lock)
             {
-                var result = Result.Select(x => new ExtractResult
-                {
-                    HashCode = Guid.NewGuid().ToString("N"),
-                    Result = x,
-                    ExtractData = DateTime.Now
-                });
+                var result = Result.Distinct();
                 dbContext.ExtractResults.AddRange(result);
                 dbContext.SaveChanges();
-                Result = new ConcurrentBag<string>();
+                Result = new ConcurrentBag<ExtractResult>();
             }
         }
     }
